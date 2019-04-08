@@ -1,0 +1,48 @@
+{
+    "name": "hapi-ts",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "supervisor -w build ./build/app.js",
+        "tslint": "tslint -c tslint.json src/**/*.ts",
+        "tsc": "tsc"
+    },
+    "author": "",
+    "keywords": [
+        "typescript",
+        "nodejs"
+    ],
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^0.18.0",
+        "hapi": "^18.0.0",
+        "hapi-auth-jwt2": "^8.3.0",
+        "hapi-pagination": "^2.0.0",
+        "hapi-swagger": "^9.4.2",
+        "inert": "^5.1.3",
+        "joi": "^13.7.0",
+        "jsonwebtoken": "^8.5.1",
+        "lodash": "^4.17.11",
+        "mysql2": "^1.6.5",
+        "nconf": "^0.10.0",
+        "package": "^1.0.1",
+        "reflect-metadata": "^0.1.13",
+        "require-all": "^3.0.0",
+        "sequelize": "^5.2.9",
+        "sequelize-cli-typescript": "^3.2.0-c",
+        "sequelize-typescript": "^1.0.0-alpha.9",
+        "vision": "^5.4.4"
+    },
+    "devDependencies": {
+        "@types/node": "^11.13.0",
+        "@types/sequelize": "^4.27.46",
+        "babel-eslint": "^10.0.1",
+        "eslint": "^5.16.0",
+        "eslint-plugin-node": "^8.0.1",
+        "ts-loader": "^5.3.3",
+        "ts-node": "^8.0.3",
+        "tslint": "^5.15.0",
+        "typescript": "^3.4.2"
+    }
+}

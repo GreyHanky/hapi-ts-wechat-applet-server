@@ -1,0 +1,17 @@
+{
+  "database": {
+    "url": "mysql://root:831015@127.0.0.1:3306/RUNOOB"
+  },
+  "weChat": {
+    "wxAppid": "wx6646cee3ccecceaa",
+    "wxSecret": "a413d6545e63a35fc2a0336d66534b89"
+  },
+  "server": {
+    "port": 5000,
+    "host": "localhost",
+    "jwtSecret": "random-secret-password",
+    "jwtExpiration": "1h",
+    "routePrefix": "",
+    "plugins": ["hapi-auth-jwt2", "hapi-pagination", "hapi-swagger"]
+  }
+}
