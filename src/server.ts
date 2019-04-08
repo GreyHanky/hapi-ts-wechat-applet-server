@@ -1,6 +1,6 @@
 import * as Hapi from "hapi";
 import { IServerConfigurations } from "./interfaces/config";
-import apis from "./api";
+import registerRoute from "./api";
 import registerModels from "./db/models";
 
 export async function init(
@@ -43,7 +43,7 @@ export async function init(
   // 注册model
   registerModels();
   // 注册路由
-  server.route(apis);
+  registerRoute(server);
 
   return server;
 }

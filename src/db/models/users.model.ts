@@ -1,5 +1,14 @@
 import { Table, Column, Model } from "sequelize-typescript";
 
+export interface IUsers {
+  id?: number;
+  nick_name: string;
+  avatar_url: string;
+  gender: number;
+  open_id: string;
+  session_key: string;
+}
+
 @Table({
   tableName: "users",
   timestamps: false

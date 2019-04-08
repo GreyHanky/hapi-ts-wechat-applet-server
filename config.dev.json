@@ -7,7 +7,7 @@
     "wxSecret": "a413d6545e63a35fc2a0336d66534b89"
   },
   "server": {
-    "port": 5000,
+    "port": 3000,
     "host": "localhost",
     "jwtSecret": "random-secret-password",
     "jwtExpiration": "1h",

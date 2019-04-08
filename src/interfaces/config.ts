@@ -12,6 +12,10 @@ export interface IServerConfigurations {
   routePrefix: string;
 }
 
+export interface IMixinsServerWechat
+  extends IWeChatConifg,
+    IServerConfigurations {}
+
 export interface IDataConfiguration {
   url: string;
 }

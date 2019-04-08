@@ -1,25 +1,26 @@
-import * as  requireAll from 'require-all';
+import * as requireAll from "require-all";
+import * as Hapi from "hapi";
 
 // 自动引入routes.js
 const allApi: object = requireAll({
   dirname: __dirname,
-  filter: /routes.js$/,
-})
+  filter: /routes.js$/
+});
 
-const routes = [];
+export default (server: Hapi.Server): Hapi.Server => {
+  const routes = [];
 
-function reduceRoute(routeNote: object) {
-  Object.values(routeNote).forEach((route = {}) => {
-    const module = route['routes.js'] || [];
-    if (module) {
-      const [moduleDefault] = module.default
-      routes.push(moduleDefault);
-    }
-  });
-}
+  function reduceRoute(routeNote: object) {
+    Object.values(routeNote).forEach((route = {}) => {
+      const module = route["routes.js"];
+      if (module) {
+        const [moduleDefault] = module.default(server);
+        routes.push(moduleDefault);
+      }
+    });
+  }
 
-reduceRoute(allApi)
+  reduceRoute(allApi);
 
-
-export default routes;
-
+  return server.route(routes);
+};
