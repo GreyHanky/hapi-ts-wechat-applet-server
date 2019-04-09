@@ -1,5 +1,4 @@
-// 封装的 decryptData，用于解码小程序的 encryptData
-import * as crypto from "crypto";
+import * as Crypto from "crypto";
 
 export interface IDecodeUserData {
   avatarUrl: string;
@@ -25,7 +24,7 @@ function decryptData(
   let decodeData: IDecodeUserData;
   try {
     // 解密，使用的算法是 aes-128-cbc
-    const decipher = crypto.createDecipheriv(
+    const decipher = Crypto.createDecipheriv(
       "aes-128-cbc",
       sessionKeyNew,
       ivNew
@@ -37,12 +36,12 @@ function decryptData(
     decodeData = JSON.parse(decoded);
     // decoded 是解密后的用户信息
   } catch (err) {
-    throw new Error("Illegal Buffer" + err);
+    throw new Error("用户信息解码错误:" + err);
   }
 
   // 解密后的用户数据中会有一个 watermark 属性，这个属性中包含这个小程序的 appid 和时间戳，下面是校验 appid
   if (decodeData.watermark.appid !== appid) {
-    throw new Error("Illegal Buffer");
+    throw new Error("用户信息解码不正确");
   }
 
   // 返回解密后的用户数据

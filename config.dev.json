@@ -1,6 +1,11 @@
 {
   "database": {
-    "url": "mysql://root:831015@127.0.0.1:3306/RUNOOB"
+    "host": "localhost",
+    "port": 3306,
+    "database": "RUNOOB",
+    "username": "root",
+    "password": "831015",
+    "dialect": "mysql"
   },
   "weChat": {
     "wxAppid": "wx6646cee3ccecceaa",

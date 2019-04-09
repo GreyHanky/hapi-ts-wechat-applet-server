@@ -1,18 +1,23 @@
 import * as Hapi from "hapi";
 import axios from "axios";
 import * as JWT from "jsonwebtoken";
-import { IMixinsServerWechat } from "../../interfaces/config";
+import { WeChatConfig } from "../../configurations";
 import { IWxLoginRquest, IWxLoginParams } from "./interfaces";
 import decryptData from "../../utils/decrypted-data";
 import Users, { IUsers } from "../../db/models/users.model";
 
+export interface IWxLoginConfig extends WeChatConfig {
+  jwtExpiration: string;
+  jwtSecret: string;
+}
+
 export default class WxLoginController {
-  private config: IMixinsServerWechat;
+  private config: IWxLoginConfig;
   private model = Users;
   private wxSessionUrl = "https://api.weixin.qq.com/sns/jscode2session";
   private grant_type = "authorization_code";
 
-  constructor(conifg: IMixinsServerWechat) {
+  constructor(conifg: IWxLoginConfig) {
     this.config = conifg;
   }
 
@@ -22,7 +27,7 @@ export default class WxLoginController {
 
     const { code, encryptedData, iv } = request.payload;
 
-    const { openid, sessionKey } = await this.getOpid({
+    const { openid, sessionKey } = await this.getSession({
       appid,
       secret,
       js_code: code,
@@ -67,7 +72,7 @@ export default class WxLoginController {
   }
 
   // 通过微信服务器获取opid
-  private async getOpid(params: IWxLoginParams) {
+  private async getSession(params: IWxLoginParams) {
     const response = await axios({
       url: this.wxSessionUrl,
       method: "GET",

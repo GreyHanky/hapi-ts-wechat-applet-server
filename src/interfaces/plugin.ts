@@ -1,9 +1,9 @@
 import * as Hapi from "hapi";
-import { IServerConfigurations } from "./config";
+import { ServerConfig } from "../configurations";
 
 export interface IPluginOptions {
   // database: IDataConfiguration;
-  serverConfigs: IServerConfigurations;
+  serverConfigs: ServerConfig;
 }
 
 export interface IPlugin {

@@ -49,7 +49,7 @@
     "no-string-throw": true, // 不允许throw一个字符串
     "no-switch-case-fall-through": true, // 不允许case段落中在没有使用breack的情况下，在新启一段case逻辑
     "no-unsafe-finally": true, // 不允许在finally语句中使用return/continue/break/throw
-    "no-unused-expression": true, // 不允许使用未使用的表达式
+    // "no-unused-expression": true, // 不允许使用未使用的表达式
     "no-use-before-declare": true, // 在使用前必须声明
     "no-var-keyword": true, // 不允许使用var
     "radix": true, // parseInt时，必须输入radix精度参数

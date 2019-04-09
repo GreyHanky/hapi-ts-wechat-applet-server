@@ -1,5 +1,5 @@
-import * as Server from './server';
-import * as Configs from './configurations';
+import * as Server from "./server";
+import { ServerConfig } from "./configurations";
 
 const start = async ({ configs }) => {
   try {
@@ -13,7 +13,6 @@ const start = async ({ configs }) => {
   }
 };
 
-const serverConifg = Configs.getServerConfigs();
-// const dbConfigs = Configs.getDatabaseConfig();
+const serverConifg = new ServerConfig();
 
 start({ configs: serverConifg });

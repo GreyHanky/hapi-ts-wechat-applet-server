@@ -1,10 +1,20 @@
 import { Sequelize } from "sequelize-typescript";
-import { getDatabaseConfig } from "../../configurations";
+import DBconfig from "../../configurations/dbConfig";
 
-const { url } = getDatabaseConfig();
+const configs = new DBconfig();
 
 export default (): Sequelize => {
-  const sequelize = new Sequelize(url);
+  const { dialect, host, port } = configs;
+  const sequelize = new Sequelize(
+    configs.database,
+    configs.username,
+    configs.password,
+    {
+      dialect,
+      host,
+      port
+    }
+  );
   sequelize.addModels([__dirname + "/*.model.*"]);
   return sequelize;
 };

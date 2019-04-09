@@ -10,10 +10,12 @@ export interface IUsers {
 }
 
 @Table({
-  tableName: "users",
-  timestamps: false
+  modelName: "users",
+  timestamps: false,
+  createdAt:'created_at',
+  updatedAt:'updated_at',
 })
-export default class Users extends Model<Users> {
+export default class Users extends Model<Users> implements IUsers {
   @Column({
     primaryKey: true,
     autoIncrement: true,

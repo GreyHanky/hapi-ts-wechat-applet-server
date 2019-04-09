@@ -1,17 +1,12 @@
 import * as Hapi from "hapi";
-import { getWeChatConfigs, getServerConfigs } from "../../configurations";
-import {
-  IMixinsServerWechat,
-  IWeChatConifg,
-  IServerConfigurations
-} from "../../interfaces/config";
+import { WeChatConfig, ServerConfig } from "../../configurations";
 import WxLoginController from "./controller";
 import { wxLogin } from "./validator";
 
 export default (server: Hapi.Server) => {
-  const weChatConfig: IWeChatConifg = getWeChatConfigs();
-  const serverConfig: IServerConfigurations = getServerConfigs();
-  const configs: IMixinsServerWechat = { ...weChatConfig, ...serverConfig };
+  const weChatConfig = new WeChatConfig();
+  const { jwtSecret, jwtExpiration } = new ServerConfig();
+  const configs = { ...weChatConfig, jwtSecret, jwtExpiration };
   const loginController = new WxLoginController(configs);
   server.bind(loginController);
 
