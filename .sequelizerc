@@ -3,11 +3,11 @@ const path = require('path')
 
 module.exports = {
 
-'config': path.resolve('src/db','config.json'),
+'config': './db_config.json',
 
-'migrations-compiled-path': path.resolve('src/db','migrations'),
+'migrations-compiled-path': path.resolve('build/db','migrations'),
 
-'migrations-source-path': path.resolve('src/db','migrations/compiled'),
+'migrations-source-path': path.resolve('src/db','migrations'),
 
 'models-path': path.resolve('src/db','models'),
 

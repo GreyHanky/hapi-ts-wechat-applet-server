@@ -1,4 +1,4 @@
-import configs from "./config";
+import Configs from "./config";
 import { Dialect } from "sequelize";
 
 export default class DBconfig {
@@ -9,7 +9,7 @@ export default class DBconfig {
   public password: string;
   public dialect: Dialect;
   constructor() {
-    const { host, port, database, username, password, dialect } = configs.get(
+    const { host, port, database, username, password, dialect } = Configs.get<DBconfig>(
       "database"
     );
     this.host = host;

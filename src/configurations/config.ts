@@ -1,16 +1,26 @@
-import * as nconf from "nconf";
-import * as path from "path";
+import CreateConfig from "./configPrivider";
 
-const configs = new nconf.Provider({
-  env: true,
-  argv: true,
-  store: {
-    type: "file",
-    file: path.join(
-      __dirname,
-      `../../config.${process.env.NODE_ENV || "dev"}.json`
-    )
+class Config {
+  private serverConfigs = new CreateConfig("../../config.json");
+  private dbConfigs = new CreateConfig("../../db_config.json");
+
+  public get<T>(configName: string): T {
+
+    switch (configName) {
+      case "weChat":
+        return this.serverConfigs.get<T>("weChat");
+
+      case "server":
+        return this.serverConfigs.get<T>("server");
+
+      case "database":
+        return this.dbConfigs.config;
+
+      default:
+        throw new Error(`没有这个配置--${configName}`);
+        break;
+    }
   }
-});
+}
 
-export default configs;
+export default new Config();

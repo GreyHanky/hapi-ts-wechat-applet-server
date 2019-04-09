@@ -1,11 +1,11 @@
-import configs from "./config";
+import Configs from "./config";
 
 export default class WeChatConfig {
   public wxAppid: string;
   public wxSecret: string;
 
   constructor() {
-    const { wxAppid, wxSecret } = configs.get(
+    const { wxAppid, wxSecret } = Configs.get<WeChatConfig>(
       "weChat"
     );
     this.wxAppid = wxAppid;

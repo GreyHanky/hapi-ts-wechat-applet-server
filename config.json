@@ -1,0 +1,44 @@
+{
+  "development": {
+    "weChat": {
+      "wxAppid": "wx6646cee3ccecceaa",
+      "wxSecret": "a413d6545e63a35fc2a0336d66534b89"
+    },
+    "server": {
+      "port": 3000,
+      "host": "localhost",
+      "jwtSecret": "random-secret-password",
+      "jwtExpiration": "1h",
+      "routePrefix": "",
+      "plugins": ["hapi-auth-jwt2", "hapi-pagination", "hapi-swagger"]
+    }
+  },
+  "test": {
+    "weChat": {
+      "wxAppid": "wx6646cee3ccecceaa",
+      "wxSecret": "a413d6545e63a35fc2a0336d66534b89"
+    },
+    "server": {
+      "port": 3000,
+      "host": "localhost",
+      "jwtSecret": "random-secret-password",
+      "jwtExpiration": "1h",
+      "routePrefix": "",
+      "plugins": ["hapi-auth-jwt2", "hapi-pagination", "hapi-swagger"]
+    }
+  },
+  "production": {
+    "weChat": {
+      "wxAppid": "wx6646cee3ccecceaa",
+      "wxSecret": "a413d6545e63a35fc2a0336d66534b89"
+    },
+    "server": {
+      "port": 3000,
+      "host": "localhost",
+      "jwtSecret": "random-secret-password",
+      "jwtExpiration": "1h",
+      "routePrefix": "",
+      "plugins": ["hapi-auth-jwt2", "hapi-pagination"]
+    }
+  }
+}

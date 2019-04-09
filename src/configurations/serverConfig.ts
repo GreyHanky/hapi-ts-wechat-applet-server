@@ -1,4 +1,4 @@
-import configs from "./config";
+import Configs from "./config";
 
 export default class ServerConfig {
   public host: string;
@@ -8,7 +8,7 @@ export default class ServerConfig {
   public routePrefix: string;
   public plugins: string[];
   constructor() {
-    const { host, port, jwtSecret, jwtExpiration, routePrefix, plugins } = configs.get(
+    const { host, port, jwtSecret, jwtExpiration, routePrefix, plugins } = Configs.get<ServerConfig>(
       "server"
     );
     this.host = host;
