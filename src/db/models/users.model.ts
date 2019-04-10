@@ -1,7 +1,7 @@
 import { Table, Column, Model } from "sequelize-typescript";
 
 export interface IUsers {
-  id?: number;
+  user_id?: number;
   nick_name: string;
   avatar_url: string;
   gender: number;
@@ -21,7 +21,7 @@ export default class Users extends Model<Users> implements IUsers {
     autoIncrement: true,
     allowNull: false
   })
-  public id: number;
+  public user_id: number;
 
   @Column
   public nick_name: string;

@@ -1,7 +1,7 @@
 import * as Hapi from "hapi";
 import { WeChatConfig, ServerConfig } from "../../configurations";
 import WxLoginController from "./controller";
-import { wxLogin } from "./validator";
+import * as Validators from "./validator";
 
 export default (server: Hapi.Server) => {
   const weChatConfig = new WeChatConfig();
@@ -20,7 +20,7 @@ export default (server: Hapi.Server) => {
         tags: ["api", "GROUP_NAME"],
         description: "创建订单",
         validate: {
-          payload: wxLogin
+          payload: Validators.wxLogin
         }
       }
     }

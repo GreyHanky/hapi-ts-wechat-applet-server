@@ -36,8 +36,10 @@
         "vision": "^5.4.4"
     },
     "devDependencies": {
+        "@types/bluebird": "^3.5.26",
         "@types/node": "^11.13.0",
         "@types/sequelize": "^4.27.46",
+        "@types/validator": "^10.11.0",
         "babel-eslint": "^10.0.1",
         "eslint": "^5.16.0",
         "eslint-plugin-node": "^8.0.1",
