@@ -1,26 +1,25 @@
-import CreateConfig from "./configPrivider";
+import * as configs from "./config.env.json";
+
+type TconfigType = "weChat" | "server" | "database";
+interface IConfigs {
+  development: Object;
+  production: Object;
+}
 
 class Config {
-  private serverConfigs = new CreateConfig("../../config.json");
-  private dbConfigs = new CreateConfig("../../db_config.json");
+  private configs: IConfigs;
 
-  public get<T>(configName: string): T {
-
-    switch (configName) {
-      case "weChat":
-        return this.serverConfigs.get<T>("weChat");
-
-      case "server":
-        return this.serverConfigs.get<T>("server");
-
-      case "database":
-        return this.dbConfigs.config;
-
-      default:
-        throw new Error(`没有这个配置--${configName}`);
-        break;
+  constructor(env: string) {
+    if (configs[env]) {
+      this.configs = configs[env];
+    } else {
+      throw new Error(`没有这个环境配置--${env}`);
     }
+  }
+
+  public get<T>(configType: TconfigType): T {
+    return this.configs[configType];
   }
 }
 
-export default new Config();
+export default new Config(process.env.NODE_ENV || "development");

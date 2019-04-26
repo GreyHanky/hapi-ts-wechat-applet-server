@@ -1,9 +1,9 @@
 import * as Hapi from "hapi";
-import { ServerConfig } from "./configurations";
+import { IServerConfig } from "./configurations";
 import registerRoute from "./api";
 import registerModels from "./db/models";
 
-export async function init(configs: ServerConfig): Promise<Hapi.Server> {
+export async function init(configs: IServerConfig): Promise<Hapi.Server> {
   const { host, port } = configs;
   const server = new Hapi.Server({
     debug: { request: ["error"] },

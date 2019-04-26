@@ -1,7 +1,27 @@
+import { Dialect } from "sequelize";
+import Config from "./config";
 
-import DBconfig from "./dbConfig";
-import ServerConfig from "./serverConfig";
-import WeChatConfig from "./weChatConfig";
+export interface IDBconfig {
+  host: string;
+  port: number;
+  database: string;
+  username: string;
+  password: string;
+  dialect: Dialect;
+}
 
-export { DBconfig, ServerConfig, WeChatConfig };
+export interface IServerConfig {
+  host: string;
+  port: number;
+  jwtSecret: string;
+  jwtExpiration: string;
+  routePrefix: string;
+  plugins: string[];
+}
 
+export interface IWeChatConfig {
+  wxAppid: string;
+  wxSecret: string;
+}
+
+export { Config };
