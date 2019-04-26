@@ -1,8 +1,10 @@
 import { QueryInterface } from "sequelize";
 
+const tableName = "users";
+
 export = {
   up: (queryInterface: QueryInterface, Sequelize) =>
-    queryInterface.createTable("users", {
+    queryInterface.createTable(tableName, {
       user_id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -16,5 +18,5 @@ export = {
       created_at: Sequelize.DATE,
       updated_at: Sequelize.DATE
     }),
-  down: (queryInterface: QueryInterface) => queryInterface.dropTable("users")
+  down: (queryInterface: QueryInterface) => queryInterface.dropTable(tableName)
 };
