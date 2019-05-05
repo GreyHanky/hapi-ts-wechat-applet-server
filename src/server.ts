@@ -1,10 +1,11 @@
 import * as Hapi from "hapi";
-import { IServerConfig } from "./configurations";
+import { IPluginOptions } from "./interfaces/plugin";
 import registerRoute from "./api";
 import registerModels from "./db/models";
 
-export async function init(configs: IServerConfig): Promise<Hapi.Server> {
-  const { host, port } = configs;
+export async function init(configs: IPluginOptions): Promise<Hapi.Server> {
+  const { serverConfigs, database } = configs;
+  const { host, port } = serverConfigs;
   const server = new Hapi.Server({
     debug: { request: ["error"] },
     port,
@@ -15,15 +16,12 @@ export async function init(configs: IServerConfig): Promise<Hapi.Server> {
       }
     }
   });
-  if (configs.routePrefix) {
-    server.realm.modifiers.route.prefix = configs.routePrefix;
+  // 路由前缀
+  if (serverConfigs.routePrefix) {
+    server.realm.modifiers.route.prefix = serverConfigs.routePrefix;
   }
 
-  const plugins: string[] = configs.plugins;
-  const pluginOptions = {
-    // database: database,
-    serverConfigs: configs
-  };
+  const plugins: string[] = serverConfigs.plugins;
   // 注册插件
   const pluginPromises: Promise<any>[] = plugins.map(
     async (pluginName: string) => {
@@ -33,13 +31,13 @@ export async function init(configs: IServerConfig): Promise<Hapi.Server> {
         `Register Plugin ${plugin.info().name} v${plugin.info().version}`
       );
 
-      return plugin.register(server, pluginOptions);
+      return plugin.register(server, configs);
     }
   );
 
   await Promise.all(pluginPromises);
   // 注册model
-  registerModels();
+  registerModels(database);
   // 注册路由
   registerRoute(server);
 

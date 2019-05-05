@@ -4,10 +4,10 @@ function green(){
     echo  "\033[32m[ $1 ]\033[0m"
 }
 
-if [ -z "$1" ]; then
- ENVIRONMENT='development'
+if [ -z $1 ]; then
+    ENVIRONMENT='development'
 else
- ENVIRONMENT="$1"
+    ENVIRONMENT="$1"
 fi
 
 echo ""
@@ -17,7 +17,7 @@ echo ""
 green " -> Step 1/2: Compiling migration scripts."
 echo ""
 for filename in ./src/db/migrations/*.ts; do
- yarn tsc -t es6 -module CommonJS -outDir ./build/db/migrations $filename
+    tsc -t es6 -module CommonJS -outDir ./build/db/migrations $filename
 done
 echo ""
 green " -> Compilation completed."
@@ -27,7 +27,7 @@ echo ""
 echo ""
 green " -> Step 2/2: Starting migration."
 echo ""
-sequelize db:migrate -env $ENVIRONMENT
+sequelize db:migrate --env $ENVIRONMENT
 echo ""
 green " -> Migration completed."
 echo ""

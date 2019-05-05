@@ -3,7 +3,7 @@ const path = require('path')
 
 module.exports = {
 
-'config': './db_config.json',
+'config': './src/configurations/config.db.json',
 
 'migrations-compiled-path': path.resolve('build/db','migrations'),
 

@@ -40,7 +40,7 @@ export default class WxLoginController {
 
     const userInfo = decryptData(encryptedData, iv, sessionKey, appid);
 
-    await this.updateUser(
+    this.updateUser(
       {
         nick_name: userInfo.nickName,
         gender: userInfo.gender,
@@ -51,17 +51,22 @@ export default class WxLoginController {
       openid
     );
 
-    const token = { token: this.generateToken(user[0].id) };
-
-    return token;
+    return { token: this.generateToken(user[0].id) };
   }
-
-  public async updateUser(updateData: IUsers, openid: string) {
-    await this.model.update(updateData, {
+  /**
+   * 更新用户信息
+   * @param updateData IUsers
+   * @param openid
+   */
+  public updateUser(updateData: IUsers, openid: string) {
+    this.model.update(updateData, {
       where: { open_id: openid }
     });
   }
-
+  /**
+   * 签发JWT
+   * @param userId
+   */
   private generateToken(userId: number) {
     const payload = {
       id: userId
@@ -71,7 +76,10 @@ export default class WxLoginController {
     return JWT.sign(payload, jwtSecret, { expiresIn: jwtExpiration });
   }
 
-  // 通过微信服务器获取opid
+  /**
+   * 微信登陆
+   * @param params IWxLoginParams
+   */
   private async getSession(params: IWxLoginParams) {
     const response = await axios({
       url: this.wxSessionUrl,

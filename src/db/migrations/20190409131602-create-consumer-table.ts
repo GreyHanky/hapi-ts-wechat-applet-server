@@ -11,7 +11,9 @@ export = {
       },
       user_id: Sequelize.INTEGER,
       type: Sequelize.STRING,
-      amount: Sequelize.DECIMAL
+      amount: Sequelize.DECIMAL,
+      created_at: Sequelize.DATE,
+      updated_at: Sequelize.DATE
     }),
   down: (queryInterface: QueryInterface) => queryInterface.dropTable(tableName)
 };

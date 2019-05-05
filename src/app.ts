@@ -1,7 +1,8 @@
 import * as Server from "./server";
-import { Config, IServerConfig } from "./configurations";
+import { Config, IServerConfig, IDBconfig } from "./configurations";
+import { IPluginOptions } from "./interfaces/plugin";
 
-const start = async ({ configs }) => {
+const start = async (configs: IPluginOptions) => {
   try {
     const server = await Server.init(configs);
     await server.start();
@@ -13,6 +14,7 @@ const start = async ({ configs }) => {
   }
 };
 
-const serverConifg = Config.get<IServerConfig>("server");
+const serverConfigs = Config.get<IServerConfig>("server");
+const database = Config.get<IDBconfig>("database");
 
-start({ configs: serverConifg });
+start({ serverConfigs, database });

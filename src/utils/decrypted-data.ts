@@ -9,6 +9,14 @@ export interface IDecodeUserData {
   };
 }
 
+/**
+ * 解码微信用户加密信息
+ * @param encryptedData
+ * @param iv
+ * @param sessionKey
+ * @param appid
+ * @return {Object} nickName, gender,language,city,avatarUrl, unionId,watermark
+ */
 function decryptData(
   encryptedData: string,
   iv: string,
