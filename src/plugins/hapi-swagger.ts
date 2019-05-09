@@ -23,6 +23,7 @@ async function register(server: Hapi.Server): Promise<Hapi.Server> {
           tags: [{ name: "tests", description: "测试相关" }],
           swaggerUI: true,
           documentationPage: true,
+          // default: /documentation
           documentationPath: "/"
         }
       }

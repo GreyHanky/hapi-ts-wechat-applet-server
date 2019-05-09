@@ -14,11 +14,11 @@ export default (server: Hapi.Server) => {
     {
       method: "POST",
       path: "/wxLogin",
-      handler: loginController.wxLogin,
-      config: {
+      options: {
+        handler: loginController.wxLogin,
         auth: false, // 不需要用户验证
-        tags: ["api", "GROUP_NAME"],
-        description: "创建订单",
+        tags: ["api", "LOGIN"],
+        description: "微信登陆认证",
         validate: {
           payload: Validators.wxLogin
         }
