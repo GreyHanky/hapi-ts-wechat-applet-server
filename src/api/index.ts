@@ -5,6 +5,10 @@ import * as Hapi from "hapi";
 const allApi: object = requireAll({
   dirname: __dirname,
   filter: /routes.*$/,
+  map: function(name, path) {
+    // 去除文件后缀
+    return name.split('.')[0];
+  }
 });
 
 export default (server: Hapi.Server): Hapi.Server => {
@@ -12,8 +16,7 @@ export default (server: Hapi.Server): Hapi.Server => {
 
   function reduceRoute(routeNote: object) {
     Object.values(routeNote).forEach((route = {}) => {
-      // 文件格式为js或ts
-      const module = route["routes.js"] || route["routes.ts"];
+      const module = route.routes;
       if (module) {
         const [...apiModules] = module.default(server);
 
