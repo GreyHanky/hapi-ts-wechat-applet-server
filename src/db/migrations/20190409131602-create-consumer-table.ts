@@ -2,7 +2,7 @@ import { QueryInterface } from "sequelize";
 
 const tableName = "consumer";
 export = {
-  up: (queryInterface: QueryInterface, Sequelize) =>
+  up: (queryInterface: QueryInterface, Sequelize:any) =>
     queryInterface.createTable(tableName, {
       consumer_id: {
         type: Sequelize.INTEGER,

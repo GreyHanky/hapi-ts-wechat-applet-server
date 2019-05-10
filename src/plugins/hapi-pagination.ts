@@ -72,10 +72,10 @@ const options = {
       '/shops',
       '/shops/{shopId}/goods',
     ],
-    exclude: [],
+    // exclude: [],
   },
 };
-async function register(server: Hapi.Server): Promise<void> {
+async function register(server: Hapi.Server){
   try {
     return server.register({
       plugin: Hapipagination,

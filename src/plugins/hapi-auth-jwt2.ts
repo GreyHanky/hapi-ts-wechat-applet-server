@@ -2,7 +2,14 @@ import * as Hapi from "hapi";
 import * as HapiAuthJwt2 from "hapi-auth-jwt2";
 import { IPlugin, IPluginOptions } from "../interfaces/plugin";
 
-const validate = (decoded, request, callback) => {
+const validate = (
+  decoded: { userId: any },
+  request: any,
+  callback: {
+    (arg0: undefined, arg1: boolean, arg2: any): void;
+    (arg0: undefined, arg1: boolean, arg2: { userId: any }): void;
+  }
+) => {
   let error;
   /*
     接口 POST /users/createJWT 中的 jwt 签发规则
@@ -35,7 +42,7 @@ async function register(
     const { serverConfigs } = pluginOptions;
     await server.register(HapiAuthJwt2);
 
-    await server.auth.strategy("jwt", "jwt", {
+    server.auth.strategy("jwt", "jwt", {
       // 需要自行在 config/index.js 中添加 jwtSecret 的配置，并且通过 process.env.JWT_SECRET 来进行 .git 版本库外的管理。
       key: serverConfigs.jwtSecret,
       validate: validate,

@@ -6,28 +6,25 @@ import * as hapiSwagger from "hapi-swagger";
 
 import { IPlugin } from "../interfaces/plugin";
 
-async function register(server: Hapi.Server): Promise<Hapi.Server> {
+async function register(server: Hapi.Server): Promise<void> {
   try {
-    return server.register([
-      inert,
-      vision,
-      {
-        plugin: hapiSwagger,
-        options: {
-          info: {
-            title: "接口文档",
-            version: pack.version
-          },
-          // 定义接口以 tags 属性定义为分组
-          grouping: "tags",
-          tags: [{ name: "tests", description: "测试相关" }],
-          swaggerUI: true,
-          documentationPage: true,
-          // default: /documentation
-          documentationPath: "/"
-        }
+    server.register([inert, vision]);
+    return server.register({
+      plugin: hapiSwagger,
+      options: {
+        info: {
+          title: "接口文档",
+          version: pack.version
+        },
+        // 定义接口以 tags 属性定义为分组
+        grouping: "tags",
+        tags: [{ name: "tests", description: "测试相关" }],
+        swaggerUI: true,
+        documentationPage: true,
+        // default: /documentation
+        documentationPath: "/"
       }
-    ]);
+    });
   } catch (error) {
     console.log(`Error registering swagger plugin: ${error}`);
   }

@@ -14,7 +14,7 @@ const start = async (configs: IPluginOptions) => {
   }
 };
 
-const serverConfigs = Config.get<IServerConfig>("server");
-const database = Config.get<IDBconfig>("database");
+const serverConfigs = Config.server;
+const database = Config.database;
 
 start({ serverConfigs, database });

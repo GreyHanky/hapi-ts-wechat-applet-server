@@ -5,20 +5,20 @@ import * as Hapi from "hapi";
 const allApi: object = requireAll({
   dirname: __dirname,
   filter: /routes.*$/,
-  map: function(name, path) {
+  map: function(name: string, path: string) {
     // 去除文件后缀
-    return name.split('.')[0];
+    return name.split(".")[0];
   }
 });
 
-export default (server: Hapi.Server): Hapi.Server => {
-  const routes = [];
+export default (server: Hapi.Server) => {
+  const routes: Hapi.ServerRoute[] = [];
 
   function reduceRoute(routeNote: object) {
     Object.values(routeNote).forEach((route = {}) => {
       const module = route.routes;
       if (module) {
-        const [...apiModules] = module.default(server);
+        const apiModules = module.default(server);
 
         routes.push(...apiModules);
       }
@@ -27,5 +27,5 @@ export default (server: Hapi.Server): Hapi.Server => {
 
   reduceRoute(allApi);
 
-  return server.route(routes);
+  server.route(routes);
 };

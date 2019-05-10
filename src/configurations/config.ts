@@ -1,38 +1,28 @@
 import * as configs from "./config.env.json";
 import * as dbConfigs from "./config.db.json";
-
 import { IDBconfig, IServerConfig, IWeChatConfig } from "./index";
 
-type TconfigType = "weChat" | "server" | "database";
-
-interface IConfig {
-  weChat: IWeChatConfig;
-  server: IServerConfig;
-  database: IDBconfig;
-}
-
-interface IConfigs {
-  development: IConfig;
-  production: IConfig;
-}
-
 class Config {
-  private configs: IConfigs;
+  public weChat:IWeChatConfig;
+  public server: IServerConfig;
+  public database: IDBconfig;
 
-  constructor(env: string) {
-    if (!dbConfigs[env]) {
+  constructor(env: any) {
+    const dbconfigEnv = (dbConfigs as any)[env];
+    const configsEnv = (configs as any)[env];
+
+    if (!dbconfigEnv) {
       throw new Error(`没有这个环境的数据库配置--${env}`);
     }
-    if (!configs[env]) {
+    if (!configsEnv) {
       throw new Error(`没有这个环境的服务器配置--${env}`);
     }
 
-    this.configs = { ...configs[env], database: dbConfigs[env] };
+    this.weChat = configsEnv.weChat;
+    this.server = configsEnv.server;
+    this.database = dbconfigEnv;
   }
 
-  public get<T>(configType: TconfigType): T {
-    return this.configs[configType];
-  }
 }
 
 export default new Config(process.env.NODE_ENV || "development");

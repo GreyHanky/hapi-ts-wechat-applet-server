@@ -4,8 +4,8 @@ import WxLoginController from "./controller";
 import * as Validators from "./validator";
 
 export default (server: Hapi.Server) => {
-  const weChatConfig = Config.get<IWeChatConfig>("weChat");
-  const { jwtSecret, jwtExpiration } = Config.get<IServerConfig>("server");
+  const weChatConfig = Config.weChat;
+  const { jwtSecret, jwtExpiration } = Config.server;
   const configs = { ...weChatConfig, jwtSecret, jwtExpiration };
   const loginController = new WxLoginController(configs);
   server.bind(loginController);
