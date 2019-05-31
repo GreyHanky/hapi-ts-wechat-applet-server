@@ -1,5 +1,4 @@
 const path = require('path');
-// const StartServerPlugin = require("start-server-webpack-plugin");
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals')
 const ReloadServerPlugin = require('reload-server-webpack-plugin');
@@ -10,7 +9,7 @@ module.exports = {
   // devtool:'cheap-module-source-map',
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, '../dist')
   },
   target: "node",
   resolve: {
@@ -25,7 +24,7 @@ module.exports = {
             loader: 'ts-loader',
             options: {
               transpileOnly: true,
-              configFile: path.resolve(__dirname, './tsconfig.json')
+              configFile: path.resolve(__dirname, '../tsconfig.json')
             }
           }
         ],

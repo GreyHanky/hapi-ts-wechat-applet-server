@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "rm -rf ./dist &&  webpack --progress --color",
-    "tslint": "tslint -c tslint.json src/**/*.ts",
-    "tsc": "tsc"
+    "dev": "rm -rf ./dist &&  webpack --config ./config/webpack.config.dev.js --progress --color",
+    "prod": "webpack --config ./config/webpack.config.prod.js --progress --color",
+    "tslint": "tslint -c tslint.json src/**/*.ts"
   },
   "author": "",
   "keywords": [
