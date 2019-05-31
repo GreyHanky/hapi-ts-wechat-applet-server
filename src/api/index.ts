@@ -1,31 +1,18 @@
-import * as requireAll from "require-all";
 import * as Hapi from "hapi";
+import test from './test';
+import wxLogin from './wxLogin';
 
-// 自动引入文件名为route的文件
-const allApi: object = requireAll({
-  dirname: __dirname,
-  filter: /routes.*$/,
-  map: function(name: string, path: string) {
-    // 去除文件后缀
-    return name.split(".")[0];
-  }
-});
+const routes = [
+  test,
+  wxLogin
+]
 
 export default (server: Hapi.Server) => {
-  const routes: Hapi.ServerRoute[] = [];
 
-  function reduceRoute(routeNote: object) {
-    Object.values(routeNote).forEach((route = {}) => {
-      const module = route.routes;
-      if (module) {
-        const apiModules = module.default(server);
+  const api = routes.reduce((accountRoute,currenRoute) => {
+    const apis = currenRoute(server);
+    return accountRoute.concat(apis);
+  },[])
 
-        routes.push(...apiModules);
-      }
-    });
-  }
-
-  reduceRoute(allApi);
-
-  server.route(routes);
+  server.route(api);
 };

@@ -7,7 +7,7 @@ export default (server: Hapi.Server) => {
 
   return [
     {
-      method: "POST",
+      method: "*",
       path: "/test",
       options: {
         handler: testRequest.request,

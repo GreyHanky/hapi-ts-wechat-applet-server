@@ -1,45 +1,53 @@
-const webpack = require('webpack');
 const path = require('path');
-const nodeExternals = require('webpack-node-externals');
+// const StartServerPlugin = require("start-server-webpack-plugin");
+const webpack = require('webpack');
+const nodeExternals = require('webpack-node-externals')
+const ReloadServerPlugin = require('reload-server-webpack-plugin');
 
 module.exports = {
-  // entry is where, say, your app starts - it can be called main.ts, index.ts, app.ts, whatever
-  // entry: ['webpack/hot/poll?100', './src/app.ts'],
-  entry: './src/app.ts',
-  // This forces webpack not to compile TypeScript for one time, but to stay running, watch for file changes in project directory and re-compile if needed
-  watch: true,
-  // Is needed to have in compiled output imports Node.JS can understand. Quick search gives you more info
-  target: 'node',
-  devtool: 'inline-source-map',
-  context: __dirname,
-  node: {
-    __filename: false,
-    __dirname: false
+  mode: 'development',
+  entry: ['./src/app.ts','webpack/hot/signal'],
+  // devtool:'cheap-module-source-map',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist')
   },
-  // Prevents warnings from TypeScript compiler
-  externals: [
-    nodeExternals({
-      whitelist: ['webpack/hot/poll?100'],
-    }),
-  ],
+  target: "node",
+  resolve: {
+    extensions: [".ts", ".js", ".json"],
+  },
   module: {
     rules: [
       {
-        test: /.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/,
-      },
-    ],
+        test: /\.tsx?$/,
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+              configFile: path.resolve(__dirname, './tsconfig.json')
+            }
+          }
+        ],
+        exclude: /node_modules/
+      }
+    ]
   },
-  mode: 'development',
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
-  },
+  externals: [nodeExternals({
+    whitelist: ['webpack/hot/signal']
+  })],
   plugins: [
-    // new webpack.HotModuleReplacementPlugin()
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+    new ReloadServerPlugin({
+      script: process.cwd() + "/dist/main.js",
+    }),
   ],
-  output: {
-    path: path.join(__dirname, 'build'),
-    filename: 'bundle.js',
-  },
-};
+  watch: true,
+  watchOptions: {
+    aggregateTimeout: 300,
+    poll: 1000,
+    ignored: /node_modules/
+  }
+}
