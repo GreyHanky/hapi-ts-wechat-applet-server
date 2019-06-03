@@ -1,5 +1,5 @@
 import { Sequelize } from "sequelize-typescript";
-import { IDBconfig } from "../../configurations";
+import { IDBconfig } from "configurations";
 
 export default (dbConfig: IDBconfig): Sequelize => {
   const { dialect, host, port } = dbConfig;

@@ -1,5 +1,5 @@
 import * as Hapi from "hapi";
-import { Config, IServerConfig, IWeChatConfig } from "../../configurations";
+import { Config, IServerConfig, IWeChatConfig } from "configurations";
 import WxLoginController from "./controller";
 import * as Validators from "./validator";
 

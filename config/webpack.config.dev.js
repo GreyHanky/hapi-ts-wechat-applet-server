@@ -14,6 +14,7 @@ module.exports = {
   target: "node",
   resolve: {
     extensions: [".ts", ".js", ".json"],
+    modules: [path.resolve(__dirname, '../src'), 'node_modules']
   },
   module: {
     rules: [

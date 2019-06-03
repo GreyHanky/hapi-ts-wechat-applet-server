@@ -1,5 +1,5 @@
 import * as Joi from "joi";
-import { IValidate } from "../../interfaces/api";
+import { IValidate } from "interfaces/api";
 
 const testRquest = Joi.object().keys({
   code: Joi.string()

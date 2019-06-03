@@ -8,10 +8,11 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, '../bundle')
-  },
+  },x
   target: "node",
   resolve: {
     extensions: [".ts", ".js", ".json"],
+    modules: [path.resolve(__dirname, '../src'), 'node_modules']
   },
   module: {
     rules: [
