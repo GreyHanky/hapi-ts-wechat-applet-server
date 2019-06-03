@@ -1,8 +1,9 @@
 import { QueryInterface } from "sequelize";
+import { IDatatypes } from "interfaces/sequelize";
 
 const tableName = "consumer";
 export = {
-  up: (queryInterface: QueryInterface, Sequelize:any) =>
+  up: (queryInterface: QueryInterface, Sequelize:IDatatypes) =>
     queryInterface.createTable(tableName, {
       consumer_id: {
         type: Sequelize.INTEGER,
@@ -12,6 +13,7 @@ export = {
       user_id: Sequelize.INTEGER,
       type: Sequelize.STRING,
       amount: Sequelize.DECIMAL,
+      remark: Sequelize.STRING,
       created_at: Sequelize.DATE,
       updated_at: Sequelize.DATE
     }),
