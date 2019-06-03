@@ -5,7 +5,7 @@ module.exports = {
 
 'config': './src/configurations/config.db.json',
 
-'migrations-compiled-path': path.resolve('build/db','migrations'),
+'migrations-compiled-path': path.resolve('migrateBuilds','migrations'),
 
 'migrations-source-path': path.resolve('src/db','migrations'),
 

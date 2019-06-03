@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# 创建一个数据库迁移文件
+
 ## green to echo
 function green(){
     echo  "\033[32m[ $1 ]\033[0m"

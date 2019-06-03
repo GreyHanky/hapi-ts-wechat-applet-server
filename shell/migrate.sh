@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# 执行数据库迁移
+
+
 ## green to echo
 function green(){
     echo  "\033[32m[ $1 ]\033[0m"
@@ -17,7 +21,7 @@ echo ""
 green " -> Step 1/2: Compiling migration scripts."
 echo ""
 for filename in ./src/db/migrations/*.ts; do
-    tsc -t es6 -module CommonJS -outDir ./build/db/migrations $filename
+    yarn  tsc -t es6 -module CommonJS -outDir ./migrateBuilds/migrations $filename
 done
 echo ""
 green " -> Compilation completed."
@@ -29,5 +33,6 @@ green " -> Step 2/2: Starting migration."
 echo ""
 sequelize db:migrate --env $ENVIRONMENT
 echo ""
+rm -rf migrateBuilds/
 green " -> Migration completed."
 echo ""
