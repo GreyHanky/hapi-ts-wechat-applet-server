@@ -5,7 +5,7 @@ const ReloadServerPlugin = require('reload-server-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: ['./src/app.ts','webpack/hot/signal'],
+  entry: ['./src/app.ts', 'webpack/hot/signal'],
   // devtool:'cheap-module-source-map',
   output: {
     filename: 'main.js',
@@ -30,7 +30,8 @@ module.exports = {
           }
         ],
         exclude: /node_modules/
-      }
+      },
+      { test: /\.ts?$/, loader: 'tslint-loader', enforce: 'pre', exclude: /(node_modules)/, }
     ]
   },
   externals: [nodeExternals({
