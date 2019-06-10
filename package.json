@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "webpack --config ./config/webpack.config.dev.js",
     "prod": "webpack --config ./config/webpack.config.prod.js",
-    "tslint": "tslint -c tslint.json src/**/*.ts"
+    "tslint": "tslint -c tslint.json src/**/*.ts",
+    "createApi":"sh ./shell/create-api.sh"
   },
   "author": "",
   "keywords": [
