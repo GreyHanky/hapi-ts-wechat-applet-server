@@ -1,9 +1,9 @@
 import * as Hapi from "hapi";
 import axios from "axios";
 import * as JWT from "jsonwebtoken";
-import { IWeChatConfig } from "configurations";
-import { decryptedData } from "utils";
-import Users, { IUsers } from "db/models/users.model";
+import { IWeChatConfig } from "../../configurations";
+import { decryptedData } from "../../utils";
+import Users, { IUsers } from "../../db/models/users.model";
 import { IWxLoginRquest, IWxLoginParams } from "./interfaces";
 
 export interface IWxLoginConfig extends IWeChatConfig {

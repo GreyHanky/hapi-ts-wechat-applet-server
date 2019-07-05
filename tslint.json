@@ -90,6 +90,7 @@
       "ignore-comments",
       "ignore-jsdoc"
     ],
-    "no-unnecessary-initializer": true // 不允许没有必要的初始化
+    "no-unnecessary-initializer": true, // 不允许没有必要的初始化
+    "strictPropertyInitialization": false
   }
 }

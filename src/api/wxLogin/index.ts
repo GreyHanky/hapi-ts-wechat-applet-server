@@ -1,9 +1,9 @@
 import * as Hapi from "hapi";
-import { Config, IServerConfig, IWeChatConfig } from "configurations";
+import { Config, IServerConfig, IWeChatConfig } from "../../configurations";
 import WxLoginController from "./controller";
 import * as Validators from "./validator";
 
-export default (server: Hapi.Server) => {
+export default (server: Hapi.Server): Hapi.ServerRoute[] => {
   const weChatConfig = Config.weChat;
   const { jwtSecret, jwtExpiration } = Config.server;
   const configs = { ...weChatConfig, jwtSecret, jwtExpiration };

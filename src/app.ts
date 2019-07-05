@@ -6,8 +6,6 @@ const start = async (configs: IPluginOptions) => {
   try {
     const server = await Server.init(configs);
     await server.start();
-
-    console.log("Server running at:", server.info.uri);
   } catch (err) {
     console.error("Error starting server: ", err.message);
     throw err;

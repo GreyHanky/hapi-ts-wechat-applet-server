@@ -18,7 +18,8 @@ async function register(server: Hapi.Server): Promise<void> {
         },
         // 定义接口以 tags 属性定义为分组
         grouping: "tags",
-        tags: [{ name: "tests", description: "测试相关" }],
+        tags: [{ name: "api", description: "测试相关" }],
+        payloadType: "form",
         swaggerUI: true,
         documentationPage: true,
         // default: /documentation

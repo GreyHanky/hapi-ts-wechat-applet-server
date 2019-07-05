@@ -10,8 +10,8 @@ async function register(
     await server.register({
       plugin: HapiPino,
       options: {
-        prettyPrint: false,
-        logEvents: ["log", "request", "response", "onPostStart"]
+        prettyPrint: true,
+        logEvents: ["log", "request", "response", "onPostStart", "onPostStop"]
       }
     });
   } catch (error) {

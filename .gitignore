@@ -7,3 +7,5 @@ npm-debug.log
 .idea
 debug.log
 yarn-error.log
+src/configurations/config.env.json
+src/configurations/config.db.json
