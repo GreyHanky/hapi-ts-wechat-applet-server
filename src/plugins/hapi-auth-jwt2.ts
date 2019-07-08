@@ -1,6 +1,6 @@
 import * as Hapi from "hapi";
 import * as HapiAuthJwt2 from "hapi-auth-jwt2";
-import { IPlugin, IPluginOptions } from "../interfaces/plugin";
+import { IPlugin, IPluginOptions } from "../helper/plugin";
 
 const validate = (
   decoded: { userId: any },

@@ -2,7 +2,7 @@ import { QueryInterface } from "sequelize";
 
 
 const tableName = "consumer";
-export = {
+module.exports = {
   up: (queryInterface: QueryInterface, Sequelize:DataTypes.IDatatypes) =>
     queryInterface.createTable(tableName, {
       consumer_id: {

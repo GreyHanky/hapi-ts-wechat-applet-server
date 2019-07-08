@@ -1,6 +1,6 @@
 import * as Hapi from "hapi";
 import * as HapiPino from "hapi-pino";
-import { IPlugin, IPluginOptions } from "../interfaces/plugin";
+import { IPlugin, IPluginOptions } from "../helper/plugin";
 
 async function register(
   server: Hapi.Server,

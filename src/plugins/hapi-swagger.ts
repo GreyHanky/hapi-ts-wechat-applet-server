@@ -4,7 +4,7 @@ import * as pack from "package";
 import * as Hapi from "hapi";
 import * as hapiSwagger from "hapi-swagger";
 
-import { IPlugin } from "../interfaces/plugin";
+import { IPlugin } from "../helper/plugin";
 
 async function register(server: Hapi.Server): Promise<void> {
   try {

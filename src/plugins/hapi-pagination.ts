@@ -1,6 +1,6 @@
 import * as Hapipagination from 'hapi-pagination';
 import * as Hapi from 'hapi';
-import { IPlugin } from '../interfaces/plugin';
+import { IPlugin } from '../helper/plugin';
 
 const options = {
   query: {

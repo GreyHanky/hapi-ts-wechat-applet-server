@@ -8,6 +8,7 @@
   },
   "scripts": {
     "nodemon:start": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/app.ts",
+    "format:lint": "./node_modules/.bin/tslint -c tslint.json 'src/**/*.ts'",
     "createApi": "sh ./shell/create-api.sh",
     "db:migrate": "sh ./shell/migrate.sh",
     "db:generate": "sh ./shell/migrete-generate.sh",

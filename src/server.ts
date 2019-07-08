@@ -1,5 +1,5 @@
 import * as Hapi from "hapi";
-import { IPluginOptions } from "./interfaces/plugin";
+import { IPluginOptions } from "./helper/plugin";
 import registerRoute from "./api";
 import registerModels from "./db/models";
 
