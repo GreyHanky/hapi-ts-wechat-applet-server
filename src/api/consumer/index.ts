@@ -7,13 +7,13 @@ export default (server: Hapi.Server) => {
 
   return [
     {
-      method: "*",
-      path: "/test",
+      method: "POST",
+      path: "/consumer-list",
       options: {
         handler: controller.request,
         auth: false, // 不需要用户验证
-        tags: ["api", "TEST"],
-        description: "测试接口",
+        tags: ["api", "consumer"],
+        description: "消费账单列表",
         validate: {
           payload: Validator.test.payload
         },
