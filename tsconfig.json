@@ -51,10 +51,11 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "baseUrl": ".",
+    "sourceMap": true,
     "paths": { "*": ["types/*", "src/*"] },
     "typeRoots": ["types"],
-    "resolveJsonModule":true,
-     "strictPropertyInitialization": false
+    "resolveJsonModule": true,
+    "strictPropertyInitialization": false
   },
   "exclude": ["node_modules", "**/*.spec.ts", "dist"]
 }

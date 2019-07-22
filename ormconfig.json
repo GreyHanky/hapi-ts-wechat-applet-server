@@ -1,0 +1,16 @@
+{
+  "name": "default",
+  "port": 3306,
+  "username": "root",
+  "password": "831015",
+  "database": "dev_weChat_applet",
+  "host": "localhost",
+  "type": "mysql",
+  "synchronize": false,
+  "logging": false,
+  "entities": ["src/db/models/*/module.ts"],
+  "migrations": ["src/db/migrations/*.ts"],
+  "cli": {
+    "migrationsDir": "src/db/migrations"
+  }
+}

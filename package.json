@@ -7,12 +7,14 @@
     "node": ">=10.0"
   },
   "scripts": {
-    "nodemon:start": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/app.ts",
+    "start": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/app.ts",
     "format:lint": "./node_modules/.bin/tslint -c tslint.json 'src/**/*.ts'",
     "createApi": "sh ./shell/create-api.sh",
     "db:migrate": "sh ./shell/migrate.sh",
     "db:generate": "sh ./shell/migrete-generate.sh",
-    "db:undo": "sh ./shell/migrete-undo.sh"
+    "db:undo": "sh ./shell/migrete-undo.sh",
+    "typeorm": "./node_modules/.bin/typeorm ",
+    "ts-node": "./node_modules/.bin/ts-node"
   },
   "author": "",
   "keywords": [
@@ -34,8 +36,7 @@
     "mysql2": "^1.6.5",
     "package": "^1.0.1",
     "reflect-metadata": "^0.1.13",
-    "sequelize": "^5.2.13",
-    "sequelize-typescript": "^1.0.0-alpha.9",
+    "typeorm": "^0.2.18",
     "vision": "^5.4.4"
   },
   "devDependencies": {
@@ -47,20 +48,15 @@
     "@types/joi": "^14.3.3",
     "@types/jsonwebtoken": "^8.3.2",
     "@types/node": "^11.13.0",
-    "@types/sequelize": "^4.27.46",
     "@types/validator": "^10.11.0",
     "@types/vision": "^5.3.6",
     "babel-eslint": "^10.0.1",
     "chalk": "^2.4.2",
     "eslint": "^5.16.0",
-    "eslint-plugin-node": "^8.0.1",
     "hapi-swagger": "^9.4.2",
     "nodemon": "^1.19.1",
-    "sequelize-cli-typescript": "https://github.com/GreyHanky/sequelize-cli-typescript.git",
-    "ts-loader": "^5.3.3",
     "ts-node": "^8.0.3",
     "tslint": "^5.15.0",
-    "tslint-loader": "^3.6.0",
     "typescript": "^3.4.2"
   }
 }

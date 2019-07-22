@@ -15,7 +15,7 @@ if [ -n "$1" ]; then
   echo ""
 
   # 创建迁移文件
-  sequelize migration:generate --name TABLE_NAME
+  node ./node_modules/.bin/typeorm migration:create --name $TABLE_NAME
 
   echo ""
   green "Generates completed"

@@ -1,4 +1,3 @@
-import { Dialect } from "sequelize";
 import Config from "./config";
 
 export interface IDBconfig {
@@ -7,7 +6,7 @@ export interface IDBconfig {
   database: string;
   username: string;
   password: string;
-  dialect: Dialect;
+  type: string;
 }
 
 export interface IServerConfig {

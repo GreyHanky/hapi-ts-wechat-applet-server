@@ -4,7 +4,7 @@
     "password": "831015",
     "database": "dev_weChat_applet",
     "host": "localhost",
-    "dialect": "mysql"
+    "type": "mysql"
   },
 
   "production": {
@@ -12,6 +12,6 @@
     "password": "831015",
     "database": "dev_weChat_applet",
     "host": "localhost",
-    "dialect": "mysql"
+    "type": "mysql"
   }
 }

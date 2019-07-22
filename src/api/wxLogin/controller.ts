@@ -3,8 +3,10 @@ import axios from "axios";
 import * as JWT from "jsonwebtoken";
 import { IWeChatConfig } from "../../configurations";
 import { decryptedData } from "../../utils";
-import Users, { IUsers } from "../../db/models/users.model";
+import UsersModel from "../../db/models/users";
 import { IWxLoginRquest, IWxLoginParams } from "./interfaces";
+
+const usersModel = new UsersModel();
 
 export interface IWxLoginConfig extends IWeChatConfig {
   jwtExpiration: string;
@@ -13,7 +15,6 @@ export interface IWxLoginConfig extends IWeChatConfig {
 
 export default class WxLoginController {
   private config: IWxLoginConfig;
-  private model = Users;
   private wxSessionUrl = "https://api.weixin.qq.com/sns/jscode2session";
   private grant_type = "authorization_code";
 
@@ -34,40 +35,31 @@ export default class WxLoginController {
       grant_type: this.grant_type
     });
 
-    const user = await this.model.findOrCreate({
-      where: { open_id: openid }
-    });
-
     const userInfo = decryptedData(encryptedData, iv, sessionKey, appid);
-
-    this.updateUser(
-      {
-        nick_name: userInfo.nickName,
-        gender: userInfo.gender,
-        avatar_url: userInfo.avatarUrl,
-        open_id: openid,
-        session_key: sessionKey
-      },
-      openid
-    );
-
-    return { token: this.generateToken(user[0].id) };
-  }
-  /**
-   * 更新用户信息
-   * @param updateData IUsers
-   * @param openid
-   */
-  public updateUser(updateData: IUsers, openid: string) {
-    this.model.update(updateData, {
-      where: { open_id: openid }
-    });
+    try {
+      // 查找更新用户
+      const user = await usersModel.findOneOrFail({ openid });
+      await usersModel.save(user, {
+        nickName: userInfo.nickName,
+        avatarUrl: userInfo.avatarUrl
+      });
+      return { token: this.generateToken(user.userid) };
+    } catch (error) {
+      // 创建用户
+      const user = await usersModel.createUser({
+        nickName: userInfo.nickName,
+        avatarUrl: userInfo.avatarUrl,
+        openid,
+        group: "base"
+      });
+      return { token: this.generateToken(user.userid) };
+    }
   }
   /**
    * 签发JWT
    * @param userId
    */
-  private generateToken(userId: number) {
+  private generateToken(userId: string) {
     const payload = {
       id: userId
     };
