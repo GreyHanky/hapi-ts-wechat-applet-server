@@ -1,34 +1,29 @@
 import * as Hapi from "hapi";
-import axios from "axios";
-import * as JWT from "jsonwebtoken";
-import { IWeChatConfig } from "../../configurations";
-import { decryptedData } from "../../utils";
 import UsersModel from "../../db/models/users";
-import { IWxLoginRquest, IWxLoginParams } from "./interfaces";
+import { decryptedData } from "../../utils";
+import { Config } from "../../configurations";
+import { getSession, generateToken } from "./controller.helper";
 
 const usersModel = new UsersModel();
 
-export interface IWxLoginConfig extends IWeChatConfig {
-  jwtExpiration: string;
-  jwtSecret: string;
+interface ILoginReq extends Hapi.Request {
+  payload: {
+    code: string;
+    encryptedData: string;
+    iv: string;
+  };
 }
 
 export default class WxLoginController {
-  private config: IWxLoginConfig;
-  private wxSessionUrl = "https://api.weixin.qq.com/sns/jscode2session";
   private grant_type = "authorization_code";
 
-  constructor(conifg: IWxLoginConfig) {
-    this.config = conifg;
-  }
-
-  public async wxLogin(request: IWxLoginRquest, h: Hapi.ResponseToolkit) {
-    const appid = this.config.wxAppid; // 小程序 appid
-    const secret = this.config.wxSecret; // 小程序 appsecret
+  public async wxLogin(request: ILoginReq, h: Hapi.ResponseToolkit) {
+    const appid = Config.weChat.wxAppid; // 小程序 appid
+    const secret = Config.weChat.wxSecret; // 小程序 appsecret
 
     const { code, encryptedData, iv } = request.payload;
 
-    const { openid, sessionKey } = await this.getSession({
+    const { openid, sessionKey } = await getSession({
       appid,
       secret,
       js_code: code,
@@ -36,14 +31,11 @@ export default class WxLoginController {
     });
 
     const userInfo = decryptedData(encryptedData, iv, sessionKey, appid);
+    let user;
+
     try {
-      // 查找更新用户
-      const user = await usersModel.findOneOrFail({ openid });
-      await usersModel.save(user, {
-        nickName: userInfo.nickName,
-        avatarUrl: userInfo.avatarUrl
-      });
-      return { token: this.generateToken(user.userid) };
+      // 查找用户
+      user = await usersModel.findOneOrFail({ openid });
     } catch (error) {
       // 创建用户
       const user = await usersModel.createUser({
@@ -52,33 +44,15 @@ export default class WxLoginController {
         openid,
         group: "base"
       });
-      return { token: this.generateToken(user.userid) };
+      return { token: generateToken(user.userid) };
     }
-  }
-  /**
-   * 签发JWT
-   * @param userId
-   */
-  private generateToken(userId: string) {
-    const payload = {
-      id: userId
-    };
-    const jwtSecret = this.config.jwtSecret;
-    const jwtExpiration = this.config.jwtExpiration;
-    return JWT.sign(payload, jwtSecret, { expiresIn: jwtExpiration });
-  }
 
-  /**
-   * 微信登陆
-   * @param params IWxLoginParams
-   */
-  private async getSession(params: IWxLoginParams) {
-    const response = await axios({
-      url: this.wxSessionUrl,
-      method: "GET",
-      params
+    // 更新用户信息
+    await usersModel.save(user, {
+      nickName: userInfo.nickName,
+      avatarUrl: userInfo.avatarUrl
     });
-    const { openid, session_key: sessionKey } = response.data;
-    return { openid, sessionKey };
+    // 返回token
+    return { token: generateToken(user.userid) };
   }
 }

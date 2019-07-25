@@ -6,7 +6,7 @@ export default class UserRepository extends ModelBase<Users> {
     super(Users);
   }
 
-  public async createUser<IUsers>(payload: IUsers) {
+  public async createUser(payload: IUsers) {
     return await this.save(new Users(), payload);
   }
 }

@@ -1,13 +1,9 @@
 import * as Hapi from "hapi";
-import { Config, IServerConfig, IWeChatConfig } from "../../configurations";
 import WxLoginController from "./controller";
-import * as Validators from "./validator";
+import * as validator from "./validator";
 
 export default (server: Hapi.Server): Hapi.ServerRoute[] => {
-  const weChatConfig = Config.weChat;
-  const { jwtSecret, jwtExpiration } = Config.server;
-  const configs = { ...weChatConfig, jwtSecret, jwtExpiration };
-  const loginController = new WxLoginController(configs);
+  const loginController = new WxLoginController();
   server.bind(loginController);
 
   return [
@@ -20,8 +16,9 @@ export default (server: Hapi.Server): Hapi.ServerRoute[] => {
         tags: ["api", "LOGIN"],
         description: "微信登陆认证",
         validate: {
-          payload: Validators.wxLogin
-        }
+          payload:validator.wxLogin.payload,
+        },
+        response: validator.wxLogin.response
       }
     }
   ];

@@ -1,6 +1,7 @@
 import * as Joi from "joi";
+import { RouteOptionsResponse } from "hapi";
 
-export const wxLogin = Joi.object().keys({
+const payload = Joi.object().keys({
   code: Joi.string()
     .required()
     .description("微信用户登录的临时code"),
@@ -13,3 +14,11 @@ export const wxLogin = Joi.object().keys({
     .required()
     .description("微信用户信息iv")
 });
+
+const response: RouteOptionsResponse = {
+  schema: Joi.object().keys({
+    token: Joi.string().description("认证信息")
+  })
+};
+
+export const wxLogin = { payload, response };
