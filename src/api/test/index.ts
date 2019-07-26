@@ -2,6 +2,7 @@ import * as Hapi from "hapi";
 import TestRequest from "./controller";
 import Validator from "./validator";
 
+
 export default (server: Hapi.Server): Hapi.ServerRoute[] => {
   const testRequest = new TestRequest();
 

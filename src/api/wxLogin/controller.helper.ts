@@ -13,7 +13,11 @@ export interface IWxLoginParams {
 
 /**
  * 微信登陆
- * @param {object} {appid,secret,js_code,grant_type}
+ * @param {object} params
+ * @param {string} params.appid
+ * @param {string} params.secret
+ * @param {string} params.js_code
+ * @param {string} params.grant_type
  * @returns {object} {openid, sessionKey}
  */
 export async function getSession(params: IWxLoginParams) {
@@ -28,8 +32,8 @@ export async function getSession(params: IWxLoginParams) {
 
 /**
  * 签发JWT
- * @param userId
- * @returns token
+ * @param {string} userId
+ * @returns {string} token
  */
 export function generateToken(userId: string) {
   const payload = {

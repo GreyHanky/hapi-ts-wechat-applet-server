@@ -48,7 +48,7 @@ export default class WxLoginController {
     }
 
     // 更新用户信息
-    await usersModel.save(user, {
+    usersModel.save(user, {
       nickName: userInfo.nickName,
       avatarUrl: userInfo.avatarUrl
     });
