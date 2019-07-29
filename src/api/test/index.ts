@@ -2,11 +2,9 @@ import * as Hapi from "hapi";
 import TestRequest from "./controller";
 import Validator from "./validator";
 
+const testRequest = new TestRequest()
 
-export default (server: Hapi.Server): Hapi.ServerRoute[] => {
-  const testRequest = new TestRequest();
-
-  return [
+const route :Hapi.ServerRoute[]= [
     {
       method: "POST",
       path: "/test",
@@ -22,4 +20,5 @@ export default (server: Hapi.Server): Hapi.ServerRoute[] => {
       }
     }
   ];
-};
+
+export default route

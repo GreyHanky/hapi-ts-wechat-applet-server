@@ -1,5 +1,5 @@
 import * as Server from "./server";
-import { Config, IServerConfig, IDBconfig } from "./configurations";
+import { Config } from "./configurations";
 import { IPluginOptions } from "./helper/plugin";
 
 const start = async (configs: IPluginOptions) => {

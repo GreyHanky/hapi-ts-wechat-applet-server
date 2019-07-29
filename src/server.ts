@@ -1,8 +1,7 @@
 import * as Hapi from "hapi";
 import { createConnection, Connection } from "typeorm";
 import { IPluginOptions } from "./helper/plugin";
-import registerRoute from "./api";
-// import registerModels from "./db/models";
+import Routes from "./api";
 
 export async function init(configs: IPluginOptions): Promise<Hapi.Server> {
   const { serverConfigs, database } = configs;
@@ -37,11 +36,10 @@ export async function init(configs: IPluginOptions): Promise<Hapi.Server> {
   );
 
   await Promise.all(pluginPromises);
-  // 注册model
-  // registerModels(database);
+  // 创建数据库链接
   const connection: Connection = await createConnection();
   // 注册路由
-  registerRoute(server);
+  server.route(Routes)
 
   return server;
 }
