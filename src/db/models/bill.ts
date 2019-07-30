@@ -1,28 +1,41 @@
-// import { Table, Column, Model } from "sequelize-typescript";
+import {
+  BaseEntity,
+  Entity,
+  Column,
+  OneToOne,
+  JoinColumn,
+  PrimaryGeneratedColumn
+} from "typeorm";
 
-// export interface IConsumer {
-//   consumer_id: number;
-//   user_id: string;
-//   type: string;
-//   amount: number;
-//   remark: string;
-// }
+import Users from "./users";
 
-// @Table({
-//   modelName: "consumer_dtl",
-//   timestamps: false,
-//   createdAt: "created_at",
-//   updatedAt: "updated_at"
-// })
-// export default class Consumer extends Model<IConsumer> implements IConsumer {
-//   @Column({
-//     primaryKey: true,
-//     autoIncrement: true,
-//     allowNull: false
-//   })
-//   public consumer_id: number;
-//   public user_id: string;
-//   public type: string;
-//   public amount: number;
-//   public remark: string;
-// }
+@Entity()
+class Bill extends BaseEntity {
+  // public static findByOpenid(openid: string) {
+  //   return this.createQueryBuilder("users")
+  //     .where("users.open_id = :openid", { openid })
+  //     .getOne();
+  // }
+
+  // public static async createUser(userInfo: IUsers) {
+  //   const user = Object.assign(new Users(), userInfo);
+  //   return await user.save();
+  // }
+  @PrimaryGeneratedColumn()
+  public id: number;
+
+  @Column({ name: "creation_time" })
+  public creationTime: Date;
+
+  @Column()
+  public amount: number;
+
+  @Column()
+  public type: string;
+
+  @OneToOne(type => Users, users => users.id)
+  @JoinColumn()
+  public consumer: string;
+}
+
+export default Bill;

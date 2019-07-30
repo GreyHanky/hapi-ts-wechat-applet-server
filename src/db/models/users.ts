@@ -2,8 +2,7 @@ import {
   BaseEntity,
   Entity,
   Column,
-  PrimaryGeneratedColumn,
-  getConnection
+  PrimaryGeneratedColumn
 } from "typeorm";
 
 export interface IUsers {
