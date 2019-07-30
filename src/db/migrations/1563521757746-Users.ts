@@ -9,7 +9,7 @@ export class Users1563762493085 implements MigrationInterface {
         name: TableName,
         columns: [
           {
-            name: "user_id",
+            name: "id",
             type: "varchar",
             isPrimary: true
           },
@@ -22,7 +22,7 @@ export class Users1563762493085 implements MigrationInterface {
             type: "varchar"
           },
           {
-            name: "group",
+            name: "relevance_user",
             type: "varchar"
           },
           {

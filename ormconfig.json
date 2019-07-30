@@ -8,7 +8,7 @@
   "type": "mysql",
   "synchronize": false,
   "logging": false,
-  "entities": ["src/db/models/*/module.ts"],
+  "entities": ["src/db/models/*.ts"],
   "migrations": ["src/db/migrations/*.ts"],
   "cli": {
     "migrationsDir": "src/db/migrations"

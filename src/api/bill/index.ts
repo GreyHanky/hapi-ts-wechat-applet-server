@@ -8,7 +8,7 @@ export default (server: Hapi.Server) => {
   return [
     {
       method: "POST",
-      path: "/consumer-list",
+      path: "/bill-list",
       options: {
         handler: controller.request,
         auth: false, // 不需要用户验证

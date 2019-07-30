@@ -4,8 +4,6 @@ import { decryptedData } from "../../utils";
 import { Config } from "../../configurations";
 import { getSession, generateToken } from "./controller.helper";
 
-const usersModel = new UsersModel();
-
 interface ILoginReq extends Hapi.Request {
   payload: {
     code: string;
@@ -34,25 +32,19 @@ export default class WxLoginController {
     let user;
 
     try {
-      // 查找用户
-      user = await usersModel.findOneOrFail({ openid });
+      // 查找用户 抛出错误则创建一个用户
+      user = await UsersModel.findOneOrFail({ openid });
     } catch (error) {
       // 创建用户
-      const user = await usersModel.createUser({
-        nickName: userInfo.nickName,
+      const user = await UsersModel.createUser({
         avatarUrl: userInfo.avatarUrl,
+        nickName: userInfo.nickName,
         openid,
-        group: "base"
+        relevanceUser: ""
       });
-      return { token: generateToken(user.userid) };
+      return { token: generateToken(user.id) };
     }
-
-    // 更新用户信息
-    usersModel.save(user, {
-      nickName: userInfo.nickName,
-      avatarUrl: userInfo.avatarUrl
-    });
     // 返回token
-    return { token: generateToken(user.userid) };
+    return { token: generateToken(user.id) };
   }
 }
