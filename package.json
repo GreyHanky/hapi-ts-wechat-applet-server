@@ -7,7 +7,7 @@
     "node": ">=10.0"
   },
   "scripts": {
-    "start": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/app.ts",
+    "start": "nodemon --exec ./node_modules/.bin/ts-node --require dotenv/config ./src/app.ts",
     "format:lint": "./node_modules/.bin/tslint -c tslint.json 'src/**/*.ts'",
     "createApi": "sh ./shell/create-api.sh",
     "db:migrate": "sh ./shell/migrate.sh",
@@ -25,6 +25,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "boom": "^7.3.0",
+    "date-fns": "^1.30.1",
     "hapi": "^18.0.0",
     "hapi-auth-jwt2": "^8.3.0",
     "hapi-pagination": "^2.0.0",
@@ -52,6 +53,7 @@
     "@types/vision": "^5.3.6",
     "babel-eslint": "^10.0.1",
     "chalk": "^2.4.2",
+    "dotenv": "^8.0.0",
     "eslint": "^5.16.0",
     "hapi-swagger": "^9.4.2",
     "nodemon": "^1.19.1",

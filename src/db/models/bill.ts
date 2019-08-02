@@ -1,41 +1,20 @@
-import {
-  BaseEntity,
-  Entity,
-  Column,
-  OneToOne,
-  JoinColumn,
-  PrimaryGeneratedColumn
-} from "typeorm";
+import { Entity, Column, ManyToOne, JoinColumn } from "typeorm";
 
-import Users from "./users";
+import User from "./user";
+import BaseRecordEntity from "../../helper/BaseRecordEntity";
+import { BillTypes } from "../../helper/constants";
 
 @Entity()
-class Bill extends BaseEntity {
-  // public static findByOpenid(openid: string) {
-  //   return this.createQueryBuilder("users")
-  //     .where("users.open_id = :openid", { openid })
-  //     .getOne();
-  // }
-
-  // public static async createUser(userInfo: IUsers) {
-  //   const user = Object.assign(new Users(), userInfo);
-  //   return await user.save();
-  // }
-  @PrimaryGeneratedColumn()
-  public id: number;
-
-  @Column({ name: "creation_time" })
-  public creationTime: Date;
-
+class Bill extends BaseRecordEntity {
   @Column()
   public amount: number;
 
-  @Column()
-  public type: string;
+  @Column("enum", { enum: BillTypes })
+  public type: BillTypes;
 
-  @OneToOne(type => Users, users => users.id)
+  @ManyToOne(type => User, user => user.id)
   @JoinColumn()
-  public consumer: string;
+  public consumer: number;
 }
 
 export default Bill;

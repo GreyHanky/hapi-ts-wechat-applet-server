@@ -1,24 +1,26 @@
+import Bill from "./bill";
+import BaseRecordEntity from '../../helper/BaseRecordEntity';
 import {
-  BaseEntity,
   Entity,
   Column,
+  OneToMany,
   PrimaryGeneratedColumn
 } from "typeorm";
 
+
 export interface IUsers {
-  id?: string;
   // 昵称
   nickName: string;
   // 头像地址
   avatarUrl: string;
   // 关联的用户id
-  relevanceUser: string;
+  relevanceUsers: string;
 
   openid: string;
 }
 
 @Entity()
-class Users extends BaseEntity implements IUsers {
+class User extends BaseRecordEntity implements IUsers {
   public static findByOpenid(openid: string) {
     return this.createQueryBuilder("users")
       .where("users.open_id = :openid", { openid })
@@ -26,12 +28,8 @@ class Users extends BaseEntity implements IUsers {
   }
 
   public static async createUser(userInfo: IUsers) {
-    const user = Object.assign(new Users(), userInfo);
-    return await user.save();
+    return this.save(this.create(userInfo));
   }
-
-  @PrimaryGeneratedColumn("uuid")
-  public id: string;
 
   // 用户名
   @Column({
@@ -45,12 +43,15 @@ class Users extends BaseEntity implements IUsers {
   public avatarUrl: string;
 
   // 关联的用户
-  @Column({ name: "relevance_user" })
-  public relevanceUser: string;
+  @Column({ name: "relevance_users" })
+  public relevanceUsers: string;
 
   // 微信openid
   @Column({ name: "open_id" })
   public openid: string;
+
+  @OneToMany(type => Bill, bill => bill.consumer)
+  public bills: Bill[];
 }
 
-export default Users;
+export default User;

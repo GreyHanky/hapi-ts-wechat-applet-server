@@ -1,5 +1,5 @@
 import * as Hapi from "hapi";
-import UsersModel from "../../db/models/users";
+import UserModel from "../../db/models/user";
 import { decryptedData } from "../../utils";
 import { Config } from "../../configurations";
 import { getSession, generateToken } from "./controller.helper";
@@ -33,14 +33,14 @@ export default class WxLoginController {
 
     try {
       // 查找用户 抛出错误则创建一个用户
-      user = await UsersModel.findOneOrFail({ openid });
+      user = await UserModel.findOneOrFail({ openid });
     } catch (error) {
       // 创建用户
-      const user = await UsersModel.createUser({
+      const user = await UserModel.createUser({
         avatarUrl: userInfo.avatarUrl,
         nickName: userInfo.nickName,
         openid,
-        relevanceUser: ""
+        relevanceUsers:''
       });
       return { token: generateToken(user.id) };
     }

@@ -35,7 +35,7 @@ export async function getSession(params: IWxLoginParams) {
  * @param {string} userId
  * @returns {string} token
  */
-export function generateToken(userId: string) {
+export function generateToken(userId: number) {
   const payload = {
     id: userId
   };
