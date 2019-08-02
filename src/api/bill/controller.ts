@@ -1,6 +1,7 @@
 import * as Hapi from "hapi";
 import { BillTypes } from "../../helper/constants";
 import { EnumHelpers } from "../../utils";
+import { IAddBillPayload } from "./validator";
 
 export default class Controller {
   // 获取账单消费类型
@@ -8,7 +9,9 @@ export default class Controller {
     return { data: EnumHelpers.getKeyAndValues(BillTypes) };
   }
 
-  public async add(request: Hapi.Request, h: Hapi.ResponseToolkit) {
-
+  public async add(request: IAddBillPayload, h: Hapi.ResponseToolkit) {
+    // const
+    console.log(request);
+    return { data: "" };
   }
 }

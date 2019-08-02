@@ -1,4 +1,13 @@
 import * as Joi from "joi";
+import { Request } from "hapi";
+
+export interface IAddBillPayload extends Request {
+  payload: {
+    amount: number;
+    type: string;
+    remark: string;
+  };
+}
 
 const addPayload = Joi.object().keys({
   amount: Joi.number()

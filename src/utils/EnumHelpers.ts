@@ -26,4 +26,5 @@ export default class EnumHelpers {
   private static getObjKeys(e: any): (number | string)[] {
     return Object.keys(e);
   }
+
 }
