@@ -1,16 +1,31 @@
 import * as Joi from "joi";
 
-const testRquest = Joi.object().keys({
-  code: Joi.string()
+const addPayload = Joi.object().keys({
+  amount: Joi.number()
     .required()
-    .description("测试参数")
+    .description("消费金额"),
+  type: Joi.string()
+    .required()
+    .description("消费类型"),
+  remark: Joi.string().description("备注")
 });
 
-const testReponse = Joi.object().keys({
-  code: Joi.string().description("返回参数")
+const addReponse = Joi.object().keys({
+  status: Joi.string().description("操作状态")
 });
 
-export const test = {
-  payload: testRquest,
-  response: { schema: testReponse }
+const getBillTypesReponse = Joi.object().keys({
+  data: Joi.array().description("类型枚举列表")
+});
+
+const validator = {
+  add: {
+    payload: addPayload,
+    response: { schema: addReponse }
+  },
+  getBillTypes: {
+    response: { schema: getBillTypesReponse }
+  }
 };
+
+export default validator;

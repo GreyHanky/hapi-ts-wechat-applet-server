@@ -50,6 +50,7 @@ class User extends BaseRecordEntity implements IUsers {
   @Column({ name: "open_id" })
   public openid: string;
 
+  // 关联的账单
   @OneToMany(type => Bill, bill => bill.consumer)
   public bills: Bill[];
 }

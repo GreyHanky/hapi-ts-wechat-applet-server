@@ -1,24 +1,21 @@
 import * as Hapi from "hapi";
 import Controller from "./controller";
-import * as Validator from "./validator";
+import validator from "./validator";
 
-export default (server: Hapi.Server) => {
-  const controller = new Controller();
+const controller = new Controller();
 
-  return [
-    {
-      method: "POST",
-      path: "/bill-list",
-      options: {
-        handler: controller.request,
-        auth: false, // 不需要用户验证
-        tags: ["api", "consumer"],
-        description: "消费账单列表",
-        validate: {
-          payload: Validator.test.payload
-        },
-        response: Validator.test.response
-      }
+const route: Hapi.ServerRoute[] = [
+  {
+    method: ["GET", "POST"],
+    path: "/bill/type-list",
+    options: {
+      handler: controller.getBillTypes,
+      auth: false, // 不需要用户验证
+      tags: ["api", "consumer"],
+      description: "消费账单类型列表",
+      response: validator.getBillTypes.response
     }
-  ];
-};
+  }
+];
+
+export default route;

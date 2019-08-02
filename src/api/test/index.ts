@@ -16,7 +16,7 @@ const route :Hapi.ServerRoute[]= [
         validate: {
           payload: Validator.payload
         },
-        response: Validator.response
+        // response: Validator.response
       }
     }
   ];

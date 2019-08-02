@@ -6,14 +6,21 @@ import { BillTypes } from "../../helper/constants";
 
 @Entity()
 class Bill extends BaseRecordEntity {
+  public static getBillTypes() {
+    return BillTypes;
+  }
+
   @Column()
   public amount: number;
 
-  @Column("enum", { enum: BillTypes })
-  public type: BillTypes;
+  @Column()
+  public type: string;
+
+  @Column({ length: 150 })
+  public remark: string;
 
   @ManyToOne(type => User, user => user.id)
-  @JoinColumn()
+  @JoinColumn({ name: "consumer_id" })
   public consumer: number;
 }
 

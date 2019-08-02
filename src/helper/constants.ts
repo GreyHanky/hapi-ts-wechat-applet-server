@@ -1,8 +1,8 @@
+/**
+ * 账单的消费类型
+ */
 export enum BillTypes {
-  // 一般
-  GENERAL = "general",
-  // 食物
-  FOOD = "food",
-  // 服饰
-  CONTUME = "costume"
+  GENERAL = "一般",
+  FOOD = "食物",
+  CONTUME = "服饰"
 }
