@@ -1,6 +1,7 @@
 import { Config } from "../../configurations";
 import axios from "axios";
 import * as JWT from "jsonwebtoken";
+import { Request } from "hapi";
 
 const wxSessionUrl = "https://api.weixin.qq.com/sns/jscode2session";
 
@@ -9,6 +10,14 @@ export interface IWxLoginParams {
   secret: string;
   js_code: string;
   grant_type: string;
+}
+
+export interface ILoginReq extends Request {
+  payload: {
+    code: string;
+    encryptedData: string;
+    iv: string;
+  };
 }
 
 /**
@@ -37,7 +46,7 @@ export async function getSession(params: IWxLoginParams) {
  */
 export function generateToken(userId: number) {
   const payload = {
-    id: userId
+    user: userId
   };
   return JWT.sign(payload, Config.server.jwtSecret, {
     expiresIn: Config.server.jwtExpiration

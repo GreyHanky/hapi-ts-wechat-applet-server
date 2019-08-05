@@ -6,8 +6,14 @@ export interface IAddBillPayload extends Request {
     amount: number;
     type: string;
     remark: string;
+    consumer:number;
   };
+
+  // auth: {
+  //   credentials:
+  // }
 }
+
 
 const addPayload = Joi.object().keys({
   amount: Joi.number()

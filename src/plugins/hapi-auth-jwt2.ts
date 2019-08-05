@@ -2,36 +2,33 @@ import * as Hapi from "hapi";
 import * as HapiAuthJwt2 from "hapi-auth-jwt2";
 import { IPlugin, IPluginOptions } from "../helper/plugin";
 
-const validate = (
-  decoded: { userId: any },
-  request: any,
-  callback: {
-    (arg0: undefined, arg1: boolean, arg2: any): void;
-    (arg0: undefined, arg1: boolean, arg2: { userId: any }): void;
-  }
-) => {
+export interface IDecoded {
+  user: number;
+}
+
+const validate = (decoded: IDecoded, request: any) => {
   let error;
   /*
     接口 POST /users/createJWT 中的 jwt 签发规则
 
     const payload = {
-      userId: jwtInfo.userId,
+      user: jwtInfo.user,
       exp: Math.floor(new Date().getTime() / 1000) + 7 * 24 * 60 * 60,
     };
     return JWT.sign(payload, process.env.JWT_SECRET);
   */
 
   // decoded 为 JWT payload 被解码后的数据
-  const { userId } = decoded;
+  const { user } = decoded;
 
-  if (!userId) {
-    return callback(error, false, userId);
+  if (!user) {
+    return { isValid: false };
   }
   const credentials = {
-    userId
+    user
   };
   // 在路由接口的 handler 通过 request.auth.credentials 获取 jwt decoded 的值
-  return callback(error, true, credentials);
+  return { isValid: true, credentials };
 };
 
 async function register(

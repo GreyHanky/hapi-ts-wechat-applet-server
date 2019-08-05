@@ -69,8 +69,8 @@ const options = {
   },
   routes: {
     include: [
-      '/shops',
-      '/shops/{shopId}/goods',
+      // '/shops',
+      // '/shops/{shopId}/goods',
     ],
     // exclude: [],
   },

@@ -2,15 +2,7 @@ import * as Hapi from "hapi";
 import UserModel from "../../db/models/user";
 import { decryptedData } from "../../utils";
 import { Config } from "../../configurations";
-import { getSession, generateToken } from "./controller.helper";
-
-interface ILoginReq extends Hapi.Request {
-  payload: {
-    code: string;
-    encryptedData: string;
-    iv: string;
-  };
-}
+import { getSession, generateToken, ILoginReq } from "./controller.helper";
 
 export default class WxLoginController {
   private grant_type = "authorization_code";
@@ -40,7 +32,6 @@ export default class WxLoginController {
         avatarUrl: userInfo.avatarUrl,
         nickName: userInfo.nickName,
         openid,
-        relevanceUsers:''
       });
       return { token: generateToken(user.id) };
     }
