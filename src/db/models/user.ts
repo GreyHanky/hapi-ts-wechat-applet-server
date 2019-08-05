@@ -1,5 +1,6 @@
 import Bill from "./bill";
 import BaseRecordEntity from '../../helper/BaseRecordEntity';
+import { defaultInput } from '../../utils/decorator';
 import {
   Entity,
   Column,
@@ -14,7 +15,7 @@ export interface IUsers {
   // 头像地址
   avatarUrl: string;
   // 关联的用户id
-  relevanceUsers: string;
+  relevanceUsers?: string;
 
   openid: string;
 }
@@ -26,8 +27,8 @@ class User extends BaseRecordEntity implements IUsers {
       .where("users.open_id = :openid", { openid })
       .getOne();
   }
-
-  public static async createUser(userInfo: IUsers) {
+  @defaultInput({relevanceUsers:''})
+  public static async createUser(userInfo:IUsers) {
     return this.save(this.create(userInfo));
   }
 
