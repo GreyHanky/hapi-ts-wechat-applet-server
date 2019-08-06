@@ -27,7 +27,6 @@ class User extends BaseRecordEntity implements IUsers {
       .where("users.open_id = :openid", { openid })
       .getOne();
   }
-  @defaultInput({relevanceUsers:''})
   public static async createUser(userInfo:IUsers) {
     return this.save(this.create(userInfo));
   }
@@ -44,7 +43,7 @@ class User extends BaseRecordEntity implements IUsers {
   public avatarUrl: string;
 
   // 关联的用户
-  @Column({ name: "relevance_users" })
+  @Column({ name: "relevance_users",nullable:true })
   public relevanceUsers: string;
 
   // 微信openid

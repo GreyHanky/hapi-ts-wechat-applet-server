@@ -22,7 +22,6 @@ class Bill extends BaseRecordEntity {
     return BillTypes;
   }
 
-  @defaultInput({ remark: "" })
   public static addBill(data: IBill) {
     return this.save(this.create(data));
   }
@@ -33,7 +32,7 @@ class Bill extends BaseRecordEntity {
   @Column()
   public type: string;
 
-  @Column({ length: 150 })
+  @Column({ length: 150, nullable: true })
   public remark: string;
 
   @ManyToOne(type => User, user => user.id)
