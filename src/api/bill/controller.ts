@@ -1,6 +1,6 @@
 import * as Hapi from "hapi";
 import { EnumHelpers } from "../../utils";
-import { IAddBillPayload } from "./validator";
+import { IAddBillPayload, IGetBillList } from "./validator";
 import Bill from "../../db/models/bill";
 import * as Boom from 'boom';
 
@@ -25,6 +25,10 @@ export default class Controller {
       return Boom.badImplementation(error)
     }
     return { status: "OK" };
+  }
+
+  public async getBillList(request: IGetBillList, h: Hapi.ResponseToolkit){
+
   }
 
 }

@@ -16,6 +16,7 @@ export interface IBill {
   consumer: number;
 }
 
+
 @Entity()
 class Bill extends BaseRecordEntity {
   public static getBillTypes() {
@@ -24,6 +25,10 @@ class Bill extends BaseRecordEntity {
 
   public static addBill(data: IBill) {
     return this.save(this.create(data));
+  }
+
+  public static getList(){
+    return this.createQueryBuilder('bill')
   }
 
   @Column()
