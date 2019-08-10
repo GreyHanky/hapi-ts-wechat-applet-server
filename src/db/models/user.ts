@@ -1,11 +1,9 @@
 import Bill from "./bill";
 import BaseRecordEntity from '../../helper/BaseRecordEntity';
-import { defaultInput } from '../../utils/decorator';
 import {
   Entity,
   Column,
   OneToMany,
-  PrimaryGeneratedColumn
 } from "typeorm";
 
 

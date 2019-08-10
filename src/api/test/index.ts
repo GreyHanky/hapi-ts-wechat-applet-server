@@ -7,14 +7,14 @@ const testRequest = new TestRequest()
 const route :Hapi.ServerRoute[]= [
     {
       method: "POST",
-      path: "/test",
+      path: "/getjwt",
       options: {
         handler: testRequest.request,
         auth: false, // 不需要用户验证
         tags: ["api", "TEST"],
         description: "测试接口",
         validate: {
-          payload: Validator.payload
+          // payload: Validator.payload
         },
         // response: Validator.response
       }

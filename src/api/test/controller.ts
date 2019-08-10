@@ -1,10 +1,9 @@
 import * as Hapi from "hapi";
-import axios from "axios";
-import { BillTypes } from '../../helper/constants';
+import { generateToken } from '../wxLogin/controller.helper';
 
 
 export default class TestRequest {
   public async request(request:Hapi.Request, h: Hapi.ResponseToolkit) {
-    return { code: Object.keys(BillTypes) };
+    return { code: generateToken(1) };
   }
 }

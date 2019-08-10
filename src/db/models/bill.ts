@@ -3,7 +3,6 @@ import { Entity, Column, ManyToOne, JoinColumn } from "typeorm";
 import User from "./user";
 import BaseRecordEntity from "../../helper/BaseRecordEntity";
 import { BillTypes } from "../../helper/constants";
-import { defaultInput } from "../../utils/decorator";
 
 export interface IBill {
   // 消费金额
@@ -16,7 +15,6 @@ export interface IBill {
   consumer: number;
 }
 
-
 @Entity()
 class Bill extends BaseRecordEntity {
   public static getBillTypes() {
@@ -27,8 +25,10 @@ class Bill extends BaseRecordEntity {
     return this.save(this.create(data));
   }
 
-  public static getList(){
-    return this.createQueryBuilder('bill')
+  public static getList(payload: { startTime: number; endTime: number }) {
+    return this.createQueryBuilder("bill")
+      .where("create_at BETWEEN :startTime ANd :endTime", payload)
+      .getMany();
   }
 
   @Column()

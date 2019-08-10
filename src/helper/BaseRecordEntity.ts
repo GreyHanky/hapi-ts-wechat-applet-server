@@ -10,7 +10,7 @@ import {
 
 const dateTransformer: ValueTransformer = {
   from(value: number) {
-    return value && new Date(value);
+    return value;
   },
   to(value: Date) {
     return getTime(value);

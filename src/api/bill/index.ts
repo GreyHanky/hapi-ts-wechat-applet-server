@@ -32,7 +32,21 @@ const route: Hapi.ServerRoute[] = [
       },
       response: validator.add.response
     }
-  }
+  },
+  {
+    method: ["POST"],
+    path: "/bill/list",
+    options: {
+      handler: controller.getBillList,
+      // auth: false, // 不需要用户验证
+      tags: ["api", "consumer"],
+      description: "消费账单类型列表",
+      validate: {
+        payload: validator.getBillList.payload
+      },
+      response: validator.getBillList.response
+    }
+  },
 ];
 
 export default route;
