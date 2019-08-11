@@ -22,11 +22,19 @@ export default class BaseRecordEntity extends BaseEntity {
   public id: number;
 
   // @CreateDateColumn({ type: 'timestamp' })
-  @Column({name:'create_at', type: "bigint", transformer: dateTransformer })
+  @Column({
+    name: "create_at",
+    type: "bigint",
+    transformer: dateTransformer
+  })
   public createdAt: Date;
 
   // @UpdateDateColumn({ type: 'timestamp' })
-  @Column({name:'update_at', type: "bigint", transformer: dateTransformer })
+  @Column({
+    name: "update_at",
+    type: "bigint",
+    transformer: dateTransformer
+  })
   public updatedAt: Date;
 
   @BeforeUpdate()

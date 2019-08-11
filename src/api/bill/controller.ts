@@ -32,7 +32,11 @@ export default class Controller {
 
     try {
       const data = await Bill.getList({ startTime, endTime });
-      return { data };
+      return {
+        data: data.map(({ updatedAt, ...other }) => ({
+          ...other
+        }))
+      };
     } catch (error) {
       return Boom.badImplementation(error);
     }

@@ -7,5 +7,6 @@ export enum BillTypes {
   CONTUME = "服饰",
   TRAFFIC= "交通",
   TRAVEL = "旅游",
-  ENTERTAIN = "请客"
+  ENTERTAIN = "请客",
+  MEDICAL = "医疗"
 }
