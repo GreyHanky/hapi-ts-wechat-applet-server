@@ -33,8 +33,10 @@ export default class Controller {
     try {
       const data = await Bill.getList({ startTime, endTime });
       return {
-        data: data.map(({ updatedAt, ...other }) => ({
-          ...other
+        data: data.map(({ updatedAt,type, ...other }) => ({
+          ...other,
+          type,
+          typeText: EnumHelpers.getValue(BillTypes, type)
         }))
       };
     } catch (error) {

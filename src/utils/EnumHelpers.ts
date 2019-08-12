@@ -19,6 +19,13 @@ export default class EnumHelpers {
     ) as T[];
   }
 
+  public static getValue(e:any, key: string){
+    if(key in e)  {
+      return e[key]
+    }
+    return undefined
+  }
+
   private static getObjValues(e: any): (number | string)[] {
     return Object.keys(e).map(k => e[k]);
   }
@@ -26,5 +33,6 @@ export default class EnumHelpers {
   private static getObjKeys(e: any): (number | string)[] {
     return Object.keys(e);
   }
+
 
 }
